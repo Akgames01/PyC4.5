@@ -1,19 +1,10 @@
 # GUI to act as a driver for the C45 algorithm
-# CT475 Machine Learning & Data Mining Assignment 3
-# Conor Creagh - 13454222
-# David Daly - 13504817
-
-# (Note) If using the GUI, we have oberved the following nbug and have been unable to find the fix
-# -> After we first fun the GUI by inputting the train % and # of runs, cliking on results shows a blank file
-# -> To fix this you have to click train again, followed by test again, and this time the reults should be present in the file
 
 import tkinter as tk
 import os
 import C45
 import pandas as pd
 import sys
-
-#Author: Conor Creagh
 
 dataSet = pd.read_csv('owls15.csv')
 
@@ -118,7 +109,12 @@ class GUI(tk.Frame):
         size.pack(padx = 152, pady = 105)
 
 
-#start the UI
-root = tk.Tk()
-app = GUI(master = root)
-app.mainloop()
+def main():
+    #start the UI
+    root = tk.Tk()
+    app = GUI(master = root)
+    app.mainloop()
+
+
+if __name__ == '__main__':
+    main()

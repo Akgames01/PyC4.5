@@ -1,7 +1,4 @@
 # Python implementation of the C4.5 Algorithm
-# CT475 Machine Learning & Data Mining Assignment 3
-# David Daly - 13504817
-# Conor Creagh - 13454222
 
 # This algorithm can be run and tested 2 ways:
 # -> By running the main in this file
@@ -20,7 +17,6 @@ targetEntropy = 0
 # Partition dataSet into training and test partitions
 # dataFrame: dataset we want to partition
 # test_percentage: percentage of the dataset we want to use for testing
-# Author: Conor Creagh
 def partitionData(dataFrame, test_percentage):
     tot_index = range(len(dataFrame)) # generate array with values 1 to length of dataset
     test_indexes = rnd.sample(tot_index, int(test_percentage * len(dataFrame))) # get a random sample of indices from this array and by multiplying by % split we want
@@ -36,7 +32,6 @@ def partitionData(dataFrame, test_percentage):
 # counts the occurrences of the lables in the dataset
 # dataFrameColum: column of the dataset we want to find occurrences for
 # returns: results: a dictionary with the class that occurs and the number of times it occurs in the column
-# Author: Conor Creagh
 def getUniqueClasses(dataFrameColumn):
     results = {}
     for row in dataFrameColumn:
@@ -50,14 +45,13 @@ def getUniqueClasses(dataFrameColumn):
 # data: dataset
 # column: column currently under inverstigations
 # returns: entropy: entropy value for the given column
-# Author: Conor Creagh
 def getEntropy(data, column):
     entropy = 0.0
     results = getUniqueClasses(data[column]) # get # of classes in data
 
     for row in results.values():
         p = float(row) / len(data[column]) # calculat probability value for each element in results
-        entropy -= p * np.log2(p) # calculate entropy 
+        entropy -= p * np.log2(p) # calculate entropy
 
     return entropy
 
@@ -66,11 +60,10 @@ def getEntropy(data, column):
 # data: dataset
 # column: column we want to find thresholds for
 # returns: splitpoints: a list of indexes in the dataframe where splitpoints occur
-# 
+#
 # This method splits the data where a change in the decision class occurs
 # rather than splitting at every row (brute force method)
 # This makes it more efficient as it generates less splitpoints for the data
-# Author: David Daly
 def findSplitPoints(data, column):
     sorted = data.sort_values([column], ascending=True)
     sorted_matrix = sorted[[column, 'type']].as_matrix()
@@ -93,7 +86,6 @@ def findSplitPoints(data, column):
 # splitpoints: an index of thresholds to use when subsetting the data
 # returns: sets_below: a list of dataframes that contain data below the given splitpoints
 #          sets_above: a list of dataframes that contain data above the given splitpoints
-# Author: David Daly
 def splitSets(data, column, splitPoints):
     sets_below = []
     sets_above = []
@@ -115,7 +107,6 @@ def splitSets(data, column, splitPoints):
 #          sets_below: the subset of the data that is below the splitpoint that gives the best IG
 #          sets_above: the subset of the data that is above the splitpoint that gives the best IG
 #          splitpoints: the splitpoint that gives the best IG
-# Author: David Daly
 def getInformationGain(data, column):
     splitpoints = findSplitPoints(data, column)  # get splitpoints for this column
     sets_below, sets_above = splitSets(data, column, splitpoints)  # split the data into sets based on these splitpoints
@@ -157,7 +148,6 @@ def getInformationGain(data, column):
 # data: dataframe that is going to be used to build the tree.
 # Must be of the format:
 # col1, col2, col3, ...coln, type where type is the decision class
-# Author: David Daly and Conor Creagh -> We both helped each other figure this out
 def train(data):
     optimal_gain = -1
     best = {}
@@ -205,7 +195,6 @@ def train(data):
 # modelled after the print function below written by Conor
 # target_row: row of a dataframe that we are classifying
 # tree: decision tree
-# Author: David Daly
 def classify(target_row, tree):
     # base case to stop recursion -> we are at a leaf node
     if tree.results != None:
@@ -230,7 +219,6 @@ def classify(target_row, tree):
 # Prints the tree in a readable format
 # tree: decision tree we want to print
 # space: spacing we want to use for child nodes
-# Author: Conor Creagh
 def printTree(tree, space=''):
     # Leaf node
     if tree.results != None:
@@ -249,7 +237,6 @@ def printTree(tree, space=''):
 # labels: list of labels that we want to cross reference the classifier result with (stripped out of test_data before it is passed in)
 # tree: decision tree we want to use for testing
 # returns: % accuracy for the tree
-# Author: Conor Creagh
 def test_tree(data, labels, tree):
     values = []
     # Loop over each row in test data frame and get the classification result for each index
@@ -270,7 +257,6 @@ def test_tree(data, labels, tree):
     return incorrect, correct, np.round(100 - (incorrect / (incorrect + correct)) * 100)
 
 
-# Author David Daly
 def main():
     # Read dataSet from file into a dataframe
     # Any dataset can be used, as long as the last column is the result
