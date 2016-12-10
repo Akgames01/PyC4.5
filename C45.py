@@ -1,11 +1,6 @@
 # Python implementation of the C4.5 Algorithm
-
-# This algorithm can be run and tested 2 ways:
-# -> By running the main in this file
-# -> By running the C45_GUI.py to have a GUI to visualise results
-# (Note) If using the GUI, we have oberved the following nbug and have been unable to find the fix
-# -> After we first fun the GUI by inputting the train % and # of runs, cliking on results shows a blank file
-# -> To fix this you have to click train again, followed by test again, and this time the reults should be present in the file
+# Uses Pandas dataFrames for managing the dataset
+# and can be run by running the main in this file
 
 import pandas as pd
 import numpy as np
