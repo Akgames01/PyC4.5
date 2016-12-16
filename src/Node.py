@@ -1,5 +1,4 @@
-#class used to create node objects for the tree
-#needed as the self parameter could not be accessed in main file
+# class used to create node objects for the tree
 class treeNode():
     def __init__(self, col=-1, colName='', value=None, results=None, rb=None, lb=None):
         self.col = col #column number the node represents

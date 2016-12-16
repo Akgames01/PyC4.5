@@ -256,8 +256,8 @@ def main():
     # Read dataSet from file into a dataframe
     # Any dataset can be used, as long as the last column is the result
     # And the columns have headings, with the last column called 'type'
-    dataSet = pd.read_csv('owls15.csv')
-    # dataSet = pd.read_csv('illness.csv')
+    dataSet = pd.read_csv('datasets/owls15.csv')
+    # dataSet = pd.read_csv('datasets/illness.csv')
 
     results = [];
     tests = 10 # number of times the algorithm will be run (more runs will give a more accurate average accuracy)
